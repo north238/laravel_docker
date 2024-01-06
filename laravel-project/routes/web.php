@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostsController::class, 'index'])->name('top');
+Route::resource('posts', PostsController::class)->only(['create', 'store']);
+Route::resource('posts', PostsController::class)->only(['create', 'store', 'show']);
+Route::resource('comments', CommentsController::class)->only(['store']);
+Route::resource('posts', PostsController::class)->only(['create', 'store', 'show', 'edit', 'update']);
+Route::resource('posts', PostsController::class)->only(['create', 'store', 'show', 'edit', 'update', 'destroy']);
