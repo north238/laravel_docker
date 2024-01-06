@@ -11,7 +11,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(10);
+        $posts = Post::with(['comments'])->orderBy('created_at', 'desc')->paginate(10);
         return view('posts.index', ['posts' => $posts]);
     }
 
@@ -73,5 +73,4 @@ class PostsController extends Controller
 
         return redirect()->route('top');
     }
-
 }
